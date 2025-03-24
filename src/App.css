@@ -155,3 +155,7 @@ ul {
   line-height: 51px !important;
   font-weight: 300 !important;
 }
+
+.requirements {
+  font-weight: 400;
+}

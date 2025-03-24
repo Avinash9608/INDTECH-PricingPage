@@ -21,6 +21,7 @@ import Plans from "./Components/Plans/Plans";
 import FaQ from "./Components/FaQ/Faq";
 import TestimonialSection from "./Components/TestimonialSection/TestimonialSection";
 import Sign from "./Components/Sign/Sign";
+
 function App() {
   return (
     <Router>
@@ -29,6 +30,7 @@ function App() {
       <Plans />
       <FaQ />
       <Sign />
+
       <TestimonialSection />
       <Footer />
     </Router>

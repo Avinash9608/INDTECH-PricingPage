@@ -1,18 +1,44 @@
 import React, { useState } from "react";
+import axios from "axios";
 // import "./Sign.css";
 
 const Sign = () => {
   const [email, setEmail] = useState("");
   const [isChecked, setIsChecked] = useState(false);
 
-  const handleSubscribe = () => {
+  const handleSubscribe = async () => {
+    // Validate email and checkbox
     if (!email) {
       alert("Please enter your email.");
       return;
     }
-    alert(`Subscribed with ${email}`);
-    setEmail("");
-    setIsChecked(false);
+    if (!isChecked) {
+      alert("Please agree to the Privacy Policy.");
+      return;
+    }
+
+    try {
+      // Call the backend API to subscribe
+      const response = await axios.post(
+        "http://localhost:5000/api/subscriberRoutes/subscribe",
+        {
+          email,
+        }
+      );
+
+      if (response.status === 201) {
+        alert("Thank you for subscribing!");
+        setEmail("");
+        setIsChecked(false);
+      }
+    } catch (error) {
+      console.error("Subscription failed:", error);
+      if (error.response && error.response.status === 400) {
+        alert(error.response.data.error); // Display error message from the backend
+      } else {
+        alert("Failed to subscribe. Please try again later.");
+      }
+    }
   };
 
   return (
